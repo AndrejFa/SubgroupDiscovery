@@ -1,0 +1,99 @@
+PackratFormat: 1.4
+PackratVersion: 0.4.8.1
+RVersion: 3.3.2
+Repos: CRAN=https://cran.rstudio.com/
+
+Package: BH
+Source: CRAN
+Version: 1.62.0-1
+
+Package: DBI
+Source: CRAN
+Version: 0.5-1
+Hash: 375869004db963f9915f2b8a49b4a718
+
+Package: R6
+Source: CRAN
+Version: 2.2.0
+Hash: 712773a3439bd32db5c40938e1a9aac2
+
+Package: Rcpp
+Source: CRAN
+Version: 0.12.9
+Hash: 7ab41cbe74918de8de87e435ef17e92d
+
+Package: assertthat
+Source: CRAN
+Version: 0.1
+Hash: 0afb92b59b02593c70ff8046700ba9d3
+
+Package: brew
+Source: CRAN
+Version: 1.0-6
+Hash: 931f9972deae0f205e1c78a51f33149b
+
+Package: digest
+Source: CRAN
+Version: 0.6.12
+Hash: e53fb8c58673df868183697e39a6a4d6
+
+Package: dplyr
+Source: CRAN
+Version: 0.5.0
+Requires: BH, DBI, R6, Rcpp, assertthat, lazyeval, magrittr, tibble
+Hash: 884482baf4ab273f2af5e641469f9ea4
+
+Package: lazyeval
+Source: CRAN
+Version: 0.2.0
+Hash: 3d6e7608e65bbf5cb170dab1e3c9ed8b
+
+Package: lubridate
+Source: CRAN
+Version: 1.6.0
+Requires: stringr
+Hash: b90f4cbefe0b3c545dd68b22c66a8a12
+
+Package: magrittr
+Source: CRAN
+Version: 1.5
+Hash: bdc4d48c3135e8f3b399536ddf160df4
+
+Package: packrat
+Source: CRAN
+Version: 0.4.8-1
+Hash: 6ad605ba7b4b476d84be6632393f5765
+
+Package: rJava
+Source: CRAN
+Version: 0.9-8
+Hash: 3e8627a2a5bd45c9bad6112acfc231d9
+
+Package: roxygen2
+Source: CRAN
+Version: 5.0.1
+Requires: Rcpp, brew, digest, stringi, stringr
+Hash: d4fe5250cc73d11d1f1b9e45ae2535c2
+
+Package: rsubgroup
+Source: CRAN
+Version: 0.6
+Requires: rJava
+Hash: 7a7d1c15fe7ea43368e376921e0a09d4
+
+Package: stringi
+Source: CRAN
+Version: 1.1.2
+Hash: 1ad6b1cc11d982ac233bf2fa2f7c9684
+
+Package: stringr
+Source: CRAN
+Version: 1.1.0
+Requires: magrittr, stringi
+Hash: 4d21d0063b37a17ea18eaec6acd29bf3
+
+Package: tibble
+Source: CRAN
+Version: 1.2
+Requires: Rcpp, assertthat, lazyeval
+Hash: 3857905737a164648031462bed6aa2ef

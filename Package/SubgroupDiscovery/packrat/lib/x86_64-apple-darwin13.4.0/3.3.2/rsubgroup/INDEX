@@ -1,0 +1,14 @@
+CreateSDTask            Creates a Subgroup Discovery Task
+DiscoverSubgroups       Performs Subgroup Discovery
+DiscoverSubgroupsByTask
+                        Performs Subgroup Discovery for a given Task
+Pattern-class           Class "Pattern" - A Simple Subgroup Description
+                        Container
+SDTaskConfig-class      Class "SDTaskConfig" - A Set of Configuration
+                        Settings
+ToDataFrame             Transforms patterns into a data frame
+as.target               Constructs a target variable (for subgroup
+                        discovery)
+credit.data             Statlog (German Credit Data) Data Set
+rsubgroup               rsubgroup Package - Algorithms and Tools for
+                        Efficient Subgroup Discovery and Analytics

@@ -1,0 +1,2 @@
+load("/Users/andrejfajfar/Dropbox/WASPSS-Andrej-Fajfar-ErasmusPracticum/skripts/SubgroupDiscovery/data/MedicalData.rda")
+load("/Users/andrejfajfar/Dropbox/WASPSS-Andrej-Fajfar-ErasmusPracticum/skripts/SubgroupDiscovery/data/VREfm.rds")

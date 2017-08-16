@@ -1,0 +1,21 @@
+SubgroupDiscovery-package
+                        SubgroupDiscovery
+VREfm                   Medical data
+confusionMatrix         Confusion matrix
+dataPartition           Data partition
+dynamicFilter           Dynamic filter
+evolutionAnalysis       Evolution analysis
+evolutionSummaryTable   Evolutionary summary table
+latexTable              LaTeX table
+multipleRsubgroup       Multiple rsubgroup analysis
+preprocessData          Preprocess database
+repeatEvolution         Repeat evolutionary analysis
+results_quality         Quality measures
+rsubgroupAnalysis       Rsubgroup analysis
+rsubgroupSummaryTable   Rsubgroup summary table
+ruleDataset             Subgroup subset
+sortDF                  Sort dataframe
+sortL                   Sort list
+sortLL                  Sort list of lists
+subgroupDiscovery       Subgroup discovery
+subgroupSummary         Subgroup summary tables

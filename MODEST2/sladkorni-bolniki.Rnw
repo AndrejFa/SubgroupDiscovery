@@ -1,0 +1,128 @@
+\documentclass[10pt]{article}
+
+%import LATEX packages
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{fullpage}
+\usepackage{pdflscape}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,chains} 
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+
+%Harvard bibliography citation
+\usepackage{natbib}
+\bibliographystyle{abbrvnat}
+\setcitestyle{authoryear,open={(},close={)}}
+
+%set spacing for header and footer
+\setlength{\voffset}{-.9in}
+\setlength{\headsep}{3.3cm}
+\setlength{\footskip}{2.2cm}
+
+\newcommand{\rpm}{\raisebox{.2ex}{$\scriptstyle\pm$}}
+
+%tabularx environment - subgroup column
+\newcolumntype{Y}{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}X}
+
+%longtable environment - subgroup column
+\newcolumntype{R}{>{\raggedright\let\newline\\\arraybackslash}p{0.42\textwidth}}
+
+%rename for contents and references
+\renewcommand{\contentsname}{Kazalo vsebine}
+\renewcommand{\refname}{Viri}
+
+%rename table and figure
+\captionsetup[table]{name=Tabela}
+\renewcommand{\figurename}{Graf}
+
+%this is contained in preamble and is used to compile only childs
+<<import, echo=FALSE, eval=TRUE, error=TRUE, warning=TRUE, cache=FALSE, include=FALSE>>=
+library(lubridate)
+library(SubgroupDiscovery)
+library(dplyr)
+library(data.table)
+
+source("~/Documents/SubgroupDiscovery/R-skripts/SubgroupAnaliza.R")
+#absolutna pot do baze podatkov
+file_path = "~/Documents/SubgroupDiscovery/data/DiabeticsDrugsSample.rds"
+
+@
+
+%page style header and footer
+\pagestyle{fancy}
+\fancyhead{}
+\rhead{\includegraphics[width=5.7cm, height=1.5cm]{slike/rs.png}}
+\lhead{\includegraphics[width=5cm, height=2.5cm]{slike/JavniSklad.png}}
+\chead{\includegraphics[width=5cm, height=2cm]{slike/eu.png}}
+\cfoot{\includegraphics[width=3cm, height=1.7cm]{slike/UM.png}}
+%\renewcommand{\footrulewidth}{0.2pt}
+
+%first page style header and footer
+\fancypagestyle{plain}{%
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}%
+  \fancyhead{}
+  \rhead{\includegraphics[width=5.7cm, height=1.5cm]{slike/rs.png}}
+  \lhead{\includegraphics[width=5cm, height=2.5cm]{slike/JavniSklad.png}}
+  \chead{\includegraphics[width=5cm, height=2cm]{slike/eu.png}}
+  \cfoot{\includegraphics[width=3cm, height=1.7cm]{slike/UM.png}}
+}
+
+\begin{document}
+
+\author{Andrej Fajfar}
+\title{PKP - Celostni model za zgodnje odkrivanje sladkorne bolezni tipa 2 (MODEST2) - Baza receptov - Subgroup analiza po posameznih letih (2011--2015)}
+\date{\today}
+
+\maketitle
+%list of content, tables and figures
+\tableofcontents
+
+\clearpage
+\section{Uvod}
+<<diabetes, child="./teorija/sladkorna-bolezen.Rnw", eval=TRUE>>=
+@
+
+\section{Opis metode "Subgroup discovery"}
+<<subgroup, child="./teorija/subgroup-discovery.Rnw", eval=TRUE>>=
+@
+
+\subsection{Iskalne metode in kvalitativne metrike}
+<<rsubgroup, child="./teorija/rsubgroup-latex-text.Rnw", eval=TRUE>>=
+@
+
+%\subsection{Evolucijski algoritmi}
+<<evolution, child="./teorija/evolution-latex-text.Rnw", eval=FALSE>>=
+@
+
+\section{Opisna statistika}
+<<diabetes, child="./opisna-statistika/opisna-statistika.Rnw", eval=TRUE>>=
+@
+\clearpage
+\section{Rezultati}
+<<diabetes, child="./rsubgroup/rsubgroup-analysis.Rnw", eval=TRUE>>=
+@
+
+% \section{Evolucijske metode}
+<<diabetes, child="./evolution/evolucijska-analiza.Rnw", eval=FALSE>>=
+@
+
+\section{Diskusija}
+
+Analiza receptov na letni ravni je pokazala, najpogostejšo souporabo zdravil z ATC3 kodo: C10 (povišan holesterol) in C09 (povišan krvni tlak) pri 54\% bolnikov v povprečju na letni ravni. Slednja spadata med glavne vzroke nastanka sladkorne bolezni tipa 2. V nadaljnem koraku smo filtrirali podatke podskupine bolnikov s pozitivnimi vrednostmi C10 in C09 ter odstranili spremenljivki iz nadaljne analize.  Analiza je pokazal, da se v vseh letih (razen 2014) pojavi souporaba diuretikov - C03 (2011: 30\%, 2012: 34\%, 2013: 36\% in 2015: 25\% bolnikov). V letu 2011 souporaba analgetikov (35\%) in pojavi zdravilo proti mašenju žil (45\%). V letu 2013 se pojavi zdravilo za blokiranje kalcijevih kanalčkov (36\%), ki se uporabljajo za zniževanje krvnega tlaka in bolezni srca in ožilja. V letu 2015 se pri 25\% bolnikov pojavlja kombinacija zdravil A02 (drugs for acid related disorders) in N02 (analgetiki), C03 in N02 ter N02 in C07 (Beta blokatorji - zdravila za krvni pritisk in bolezni srca in ožilja). 
+
+\clearpage
+
+%cite R packages
+\nocite{R-knitr, R-rsubgroup, R-SDEFSR, R-xtable, R-dplyr, R-caret}
+
+\bibliography{./Bibliography/bibliography.bib}
+\end{document}

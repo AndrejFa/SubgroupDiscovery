@@ -1,0 +1,82 @@
+%povezava s starševskim dokumentom
+<<opisna-statistika, echo=FALSE, cache=FALSE, eval=TRUE>>=
+#connect with parent file
+knitr::set_parent('../sladkorni-bolniki.Rnw')
+@
+
+Baza je bila pridobljena od ZZZS (Zavod za zdravstveno zavarovanje Slovenije). Vsebuje podatke o vseh izdanih receptih v Republiki Sloveniji za leta 2011-2015. Iz baze smo filtrirala vzorec 100000 receptov, ki je vseboval podatke o sladkornih bolnikih. Spremenljivke predstavljajo podatke o pacientih (spol, starost, ob\v{c}ina), zdravstveni ustanovi in zdravnikih, kjer so bila zdravila predpisana, vrsti recepta in ceni obravnavnave bolnika ter ATC kode zdravil z opisi. Ohranili smo 3 spremenljivke: spol, starost in ATC 3 \v{c}rkovne kode. Slednje smo pretvorili v binarne spremenljivke in kot tar\v{c}no vrednost dolo\v{c}ili A10. Podatke o predpisanih zdravilih za vsakega pacienta smo zdru\v{z}ili na letni ravni, odstranili zdravila, ki so bili predpisana v manj\v{s}em \v{s}tevilu od letnega povpre\v{c}ja na posameznega bolnika in z iz\v{c}rpno metodo SD--MAP poiskali skupine zdravil, ki jih sladkorni bolniki napogosteje uporabljajo skupaj z zdravili za sladkorno bolezen.  
+
+\begin{center}
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|l|c|}
+\hline
+Leto & Atribut & Povzetek \\
+\hline
+\multirow{4}{*}{2011}
+ & Spol (Mo\v{s}ki/\v{Z}enske) & 360/305 \\ \cline{2-3}
+ & Starost (Povp\rpm sd) [min, max]& 68.57 (\rpm 10.37) [18, 97] \\ \cline{2-3}
+ & Recepti (Povp\rpm sd) [min, max]& 83.21 (\rpm 133.12) [1, 618] \\ \cline{2-3}
+ & Razred -- A10 (DA/NE) & 618/47 \\
+\hline
+\multirow{4}{*}{2012}
+ & Spol (Mo\v{s}ki/\v{Z}enske) & 346/304 \\ \cline{2-3}
+ & Starost (Povp\rpm sd) [min, max]& 69.52 (\rpm 10.36) [19, 98] \\ \cline{2-3}
+ & Recepti (Povp\rpm sd) [min, max]& 82.68 (\rpm 131.64) [1, 606] \\ \cline{2-3}
+ & Razred -- A10 (DA/NE) & 606/44 \\
+\hline
+\multirow{4}{*}{2013}
+ & Spol (Mo\v{s}ki/\v{Z}enske) & 332/300 \\ \cline{2-3}
+ & Starost (Povp\rpm sd) [min, max]& 69.91 (\rpm 10.18) [20, 99] \\ \cline{2-3}
+ & Recepti (Povp\rpm sd) [min, max]& 79.04 (\rpm 127.53) [1, 597] \\ \cline{2-3}
+ & Razred -- A10 (DA/NE) & 597/35 \\
+\hline
+\multirow{4}{*}{2014}
+ & Spol (Mo\v{s}ki/\v{Z}enske) & 317/281 \\ \cline{2-3}
+ & Starost (Povp\rpm sd) [min, max]& 70.40 (\rpm 10.17) [21, 100] \\ \cline{2-3}
+ & Recepti (Povp\rpm sd) [min, max]& 75.19 (\rpm 121.19) [1, 566] \\ \cline{2-3}
+ & Razred -- A10 (DA/NE) & 566/32 \\
+\hline
+\multirow{4}{*}{2015}
+ & Spol (Mo\v{s}ki/\v{Z}enske) & 292/267 \\ \cline{2-3}
+ & Starost (Povp\rpm sd) [min, max]& 71.08 (\rpm 10.05) [22, 101] \\ \cline{2-3}
+ & Recepti (Povp\rpm sd) [min, max]& 80.25 (\rpm 118.78) [1, 531] \\ \cline{2-3}
+ & Razred -- A10 (DA/NE) & 531/28 \\
+\hline
+\end{tabular}
+\caption{Opis spremenljivk}
+\label{tab:Opis}
+\end{table}
+\end{center}
+
+
+<<zdravila, echo=FALSE, error=TRUE, warning=FALSE, eval=TRUE, results='asis'>>=
+#opis skupin zdravil
+diabetes <- readRDS(file_path)
+zdravila <- diabetes %>% distinct(ATC3, ATC3Description)
+zdravila <- zdravila[order(zdravila$ATC3),]
+names(zdravila) <- c("ATC 3 koda", "ATC 3 opis kode")
+#tabela
+latexTable(df      = zdravila[1:74,], 
+           caption = "Opis ATC 3 kod zdravil", 
+           align   = "|l|c|l|", 
+           tabular.environment = "longtable",
+           floating = FALSE, 
+           include.rownames = FALSE)
+@
+
+<<freq-zdravil, echo=FALSE, error=TRUE, warning=FALSE, eval=FALSE, fig.cap="Stevilo receptov na posamezno skupino zdravil", fig.height=4, fig.pos="!h">>=
+z <- apply(X = sb_data[2:ncol(sb_data)], 2, function(x){
+    sum(x == "DA")
+})
+
+barplot(sort(z, decreasing = TRUE), space = 0.5,las = 2, cex.axis = 0.75, ylab = "Stevilo zdravil", xlab = "ATC 3 koda zdravila", ylim = c(0,350), cex.names = 0.6)
+
+@
+
+<<target-dist, echo=FALSE, error=TRUE, warning=FALSE, eval=FALSE, fig.cap="Porazdelitev tarcne spremenljivke - zdravila za diabetes A10", fig.height=4, fig.pos="ht">>=
+barplot(table(sb_data$A10), ylim = c(0, 500), ylab = "Stevilo sladkornih bolnikov")
+
+@
+
+%\clearpage

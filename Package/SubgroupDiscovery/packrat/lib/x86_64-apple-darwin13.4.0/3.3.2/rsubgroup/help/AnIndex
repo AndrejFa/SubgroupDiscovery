@@ -1,0 +1,11 @@
+as.target	as.target
+CreateSDTask	CreateSDTask
+credit.data	credit.data
+DiscoverSubgroups	DiscoverSubgroups
+DiscoverSubgroupsByTask	DiscoverSubgroupsByTask
+Pattern	Pattern-class
+Pattern-class	Pattern-class
+rsubgroup	subgroup-package
+SDTaskConfig	SDTaskConfig-class
+SDTaskConfig-class	SDTaskConfig-class
+ToDataFrame	ToDataframe

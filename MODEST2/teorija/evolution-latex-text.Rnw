@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%SHORT TEORETICAL DESCRIPTION OF EVOLUTIONARY ALGORITHMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<evolution-text, echo=FALSE, eval=TRUE>>=
+knitr::set_parent("../poročilo-test10000.Rnw")
+@
+
+Iskalne metode:
+\begin{itemize}
+    \item \textbf{SDIGA}: Subgroup Discovery Iterative Genetic Algorithm. Sekven\v{c}na izvedba genetskega algoritma v iterativni shemi dokler ustavitveni pogoj ni dose\v{z}en. Rezultat je ena podskupina. Z lokalno optimizacijo lahko pove\v{c} splo\v{s}nost podskupine.
+    \item \textbf{MESDIF}: Multiobjective Evolutionary Subgroup DIscovery Fuzzy rules. Ovrednotenje podskupin v elitni populaciji v vsaki iteraciji dokler ustavitveni pogoj ni dose\v{z}en. Elitno populacijo sestavljajo ne--dominantni osebki, ki jih dolo\v{c}imo s primerjavo dominantnosti v Pareto obmo\v{c}ju.  
+    \item \textbf{NMEEF-SD}: Non-dominated Multi-objective Evolutionary algorithm for Ex- tracting Fuzzy rules in Subgroup Discovery. Razvr\v{s}\v{c}anje s ponovnim za\v{c}etkom ob dalj\v{s}em nespreminjanju metrike pokritost v podskupinah.
+    \item \textbf{FuGePSD}: Genetski pristopm, kjer so osebki predstavljeni s drevesno strukturo. Taka shema omogo\v{c}a odkrivanje podskupin za vse vrednosti tar\v{c}ne spremenljivke v enkratni izvedbi. Velikost populacije se spreminja s kooperativno--tekmovalnem postopku imenovanem tudi kot Token tekmovanje. \cite{garcia2016}.
+\end{itemize}
+Kvalitativne metrike:
+\begin{enumerate}
+    \item \textbf{Splo\v{s}nost ali pokritost}:
+    \begin{itemize}
+        \item \emph{Podpora, Support}: 
+        \[ Sup(R) = \frac{ n(Cond \wedge Target_{ value }) }{ n_s } \] kjer \(n(Cond \wedge Target_{ value })\) predstavlja \v{s}tevilo pravilno pozitivnih primerkov in \(n_s\) je velikost populacije.
+        \item \emph{Pokritost, Coverage}: 
+        \[ Cov(R) = \frac{ n(Cond) }{ n_s } \] kjer \(n(Cond)\) predstavlja \v{s}tevilo primerkov v podskupini.
+    \end{itemize}
+    
+    \item \textbf{Zanesljivost}:
+    
+    \begin{itemize}
+        \item \emph{Zaupanje, Confidence}: 
+        \[ Conf(R) = \frac{ n(Cond \wedge Target_{ value }) }{ n(Cond) } \]
+    \end{itemize}
+    
+    \item \textbf{Novost, novelity}:
+    
+    \begin{itemize}
+        \item \emph{Pomembnost, Significance}: 
+        \[ Sign(R) = 2 \cdot \displaystyle\sum_{ k=1 }^{ n_c } n(Cond \wedge { Target_{ value } }_k) \cdot \log \left(         \frac{ n(Cond \cdot { Target_{ value } }_k) }{ n(Cond \cdot Target_{ value }) \cdot p(Cond) }\right) \] 
+        kjer \(p(Cond) = \) \emph{pokritost}, \({Target_{ value }}_k\) je k-ta vrednost tar\v{c}ne spremenljivke in \(n_s\) \v{s}tevilo vrednosti tar\v{c}ne spremenljivke.
+    \end{itemize}
+    
+    \item \textbf{Hibridne metrike}:
+    
+    \begin{itemize}
+        \item \emph{Nenavadnost, Unusualness}: 
+        \[ WRAcc(R) = \frac{ n(Cond) }{ n_s } \left( \frac{ n(Cond \wedge Target_{ value }) }{ n(Cond) } - 
+        \frac{ n(Target_{ value }) }{ n_s } \right) \]
+        
+        \item \emph{PPV ali senzitivnost}:
+        \[ TPr(R) = \frac{ n(Cond \wedge Target_{ value }) }{ n(Target_{ value }) } \]
+        
+        \item \emph{FPV ali specifi\v{c}nost}:
+        \[ FPr(R) = \frac{ n(Cond \wedge \overline{ Target_{ value } }) }{ n(\overline{ Target_{ value } }) } \]
+    \end{itemize}
+    \cite{garcia2016}
+\end{enumerate}

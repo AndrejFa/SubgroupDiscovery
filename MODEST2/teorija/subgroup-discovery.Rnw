@@ -1,0 +1,35 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%SHORT TEORETICAL INTRODUCTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+"Subgroup discovery" (SD) je nadzorovana tehnika podatkovnega rudarjenja v opisni in raziskovalni analizi podatkov. Uvrstimo jo lahko vmes med klasifikacijo, potrebuje tar\v{c}no spremenljivko za dolo\v{c}itev (zna\v{c}ilnih) podskupin, in opisne metode. Cilj ni napovedovanje izida novega vnosa ampak opis obstoje\v{c}ih povezav med spremenljivkami. Uporablja se za opis osnovnih razmerij med spremenljivkami v bazi podatkov, samodejno generiranje hipotez in raziskovanje podatkov \citep{atzmueller2015}. Osnovni cilj je dolo\v{c}itev najbolj zna\v{c}ilnih podskupin v povezavi s tar\v{c}no spremenljivko. Najbolj zna\v{c}ilne podskupine so tiste, ki imajo maksimalno \v{s}tevilo elementov in imajo neobi\v{c}ajno statisti\v{c}no porazdelitev v povezavi s tar\v{c}no spremenljivko. Slednja lastnost omogo\v{c}a ohranjanje nepopolnih povezav in s tem je dovoljen ve\v{c}ji dele\v{z} napa\v{c}no pozitivnih (NP) elementov. \v{C}asovna odvisnost SD je v eksponentnem odnosu z dimenzijami baze podatkov \citep{garcia2016}.    
+
+Podatkovno rudarjenje bo potekalo v \textbf{R} ("R version 3.3.2 (2016-10-31)") statisti\v{c}nem programskem jeziku in urejevalniku \textbf{RStudio} ("Version 1.0.136"). 
+
+Na voljo sta 2 knji\v{z}njici za SD v R okolju: \emph{rsubgroup} in \emph{SDEFSR}. Za potrebe dela na erazmus praksi, pisanje ponovljivih poro\v{c}il (kombinacija R in \emph{LaTeX} code - .Rnw datoteke) in urejene organizacije datotek, so analiti\v{c}ne funkcionalnosti zdru\v{z}ene v knji\v{z}njici \emph{SubgroupDiscovery}. \textbf{\emph{rsubgroup}} knji\v{z}njica predstavlja vmesnik do spletnega okolja VIKAMINE (http://www.vikamine.org/) -- "Visual", "Interactive", "Knowledge-Intensive", "Analytics" in "MINing Environment". Knji\v{z}njica je Java odvisna \citep{atzmueller2015}. \textbf{\emph{SDEFSR}} je neodvisna knji\v{z}njica v celoti zgrajena v R okolju. Vsebuje metode evolucijskih mehkih sistemov ("Evolutionary Fuzzy Systems") \citep{garcia2016}. Proces odkrivanja zna\v{c}ilnih podskupin najlažje ponazorimo z diagramom:
+\begin{figure}[h]
+\centering
+    \begin{tikzpicture}[
+        > = {Latex[]},
+        start chain = going right,
+        node distance=7mm,
+        block/.style={shape=rectangle, draw,
+                      inner sep=1mm, align=center,
+                      minimum height=7mm,
+                      join=by ->, on chain}]
+    %placing the blocks
+    \node[block] (n1) {Vhodni podatki};
+    \node[block] (n2) {iskalne \\ strategije};
+    \node[block] (n3) {kvalitativne \\ metrike};
+    \node[block] (n3) {podskupine};
+    \end{tikzpicture}
+\caption{Osnovna shema odkrivanja zna\v{c}ilnih podskupin}
+\end{figure}
+\\
+\\
+Osnovne zna\v{c}ilnosti iskanja podskupin predstavljajo:
+\begin{itemize}
+    \item \emph{tip tar\v{c}ne spremenljivke}: numeri\v{c}ne, kategori\v{c}ne ali binarne. 
+    \item \emph{opisni jezik}: predstavitev pogojev, $Pogoj \rightarrow Tarcna_{vrednost}$, ki opisujejo zna\v{c}ilno podskupino. Pogoje lahko predstavimo kot pare povezane z relacijskimi operatorji, npr. $spremenljivka = vrednost$ ali v disjuktivni normalni obliki $spremenljivka = [vrednost_1, vrednost_2]$. Predstavitev je odvisna od tipa tar\v{c}ne spremenljivke ali od izbrane metode. 
+    \item \emph{kvalitativne metrike}: vodijo proces iskanja in so pokazatelj kvalitete podskupine ali podskupin. 
+    \item \emph{iskalne strategije ali metode}: prestavljajo na\v{c}in iskanja podskupin v prostoru vseh mo\v{z}nih re\v{s}itev. Delijo se na iz\v{c}rpne (npr. "sd--map", evolucijske metode) in hevristi\v{c}ne (npr. "beam") \citep{garcia2016}. 
+\end{itemize}

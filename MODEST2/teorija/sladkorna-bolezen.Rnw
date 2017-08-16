@@ -1,0 +1,17 @@
+\subsection{Sladkorna bolezen}
+Sladkorna bolezen je kroni\v{c}no presnovna bolezen, kjer je motena presnova krvnega sladkorja, z drugim imenom glukoza. Osnovna motja je nezmo\v{z}nost prehanja glukoze iz krvi v celice ob prisotnosti encima, inzulin. Nivo glukoze se v krvi pove\v{c}a, \v{c}e je inzulina premalo ali se tar\v{c}ne celice nanj ne odzivajo \citep{kmecl2013}. 
+
+Poznamo 3 tipe sladkorne bolezni:
+\begin{itemize}
+    \item tip 1: pojavi se pri otrocih ali mladostnikih in je od inzulina odvisna.
+    \item tip 2: najpogostejša oblika, saj za njo zboli 90\% sladkornih bolnikov. Najpogosteje se razvije pri odraslih. Zna\v{c}ilni sta 2 okvari: neodzivnost tar\v{c}nih tkiv na inzulin in nepravilno delovanje beta--celic v trebu\v{s}ni slinavki. 
+    \item nose\v{c}ni\v{s}ka: prehodna, pojavi se pri \v{z}enskah v \v{c}asu nose\v{c}nosti \citep{kmecl2013}.
+\end{itemize} 
+
+Dejavniki tveganja za razvoj sladkorne bolezni so povezani z na\v{c}inom \v{z}ivljenja (npr. debelost, nezdrava prehrana), s kroni\v{c}nimi obolenji (npr. visok krvni tlak, povi\v{s}an holesterol), starostjo in dru\v{z}insko diagnozo \citep{kmecl2013}.
+
+\subsection{Namen in cilji}
+
+Namen analize je ugotoviti vrsto zdravil, ki sladkorni bolniki uporabljajo oz. so jim predpisana skupaj z zdravili za sladkorno bolezen. Analizirali smo bazo receptov, ki je vsebovala zapise o sladkornih bolnikih v letih od 2011 do 2015.
+
+Cilj analize je z opisno metodo Subgroup discovery (SD) dolo\v{c}iti skupine sladkornih bolnikov s skupnimi lastnostmi v povezavi s tar\v{c}no spremenljivko. Skupne lastnosti definiramo kot predpisana zdravila, ki so skupna vsem \v{c}lanom skupine. Kot tar\v{c}no spremenljivko smo uporabili 3 \v{c}rkovno ATC kodo za zdravila proti diabetesu A10.

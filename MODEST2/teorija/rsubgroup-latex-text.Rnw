@@ -1,0 +1,49 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%SHORT TEORETICAL BACKGROUND FOR RSUBGROUP PACKAGE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<rsubgroup-text, echo=FALSE, eval=TRUE>>=
+knitr::set_parent("../poročilo-test10000.Rnw")
+@
+
+R knji\v{z}njica "rsubgroup" vsebuje iskalne metode:
+\begin{itemize}
+    \item \textbf{beam}: ne--iz\v{c}rpno iskanje. Iterativni pristop. Re\v{s}itev je najbolj optimalna (lokalni optimum) in ni najbolj\v{s}a mo\v{z}na. Prednost je hitrost in je primerna za velike dimenzije baze podatkov. Uporaba samo s kategori\v{c}no tar\v{c}no vrednostjo.
+    \item \textbf{sd--map} in \textbf{sd--map--dis}: iz\v{c}rpno iskanje. Re\v{s}itev je najbolj\v{s}a (globalni optimum). Podatkovna struktura predstavlja drevo pogostih vzorcev ("frequent pattern tree", FP--tree)
+    \item \textbf{bsd}: iz\v{c}rpno iskanje. Podatkovna struktura predstavlja vertikalno postavitev bitnih vektorjev \citep{atzmueller2015}.
+\end{itemize}
+Kvalitativne metrike so najpomembnej\v{s}a komponenta SD:
+\begin{itemize}
+    \item \textbf{Binarna funkcija} (BT):
+\[
+q_{BT} = \frac{p - p_0}{\sqrt{p_0 \cdot (1 - p_0)}} \sqrt{n} \sqrt{\frac{N}{N - n}} , 
+\]
+kjer \emph{p} predstavlja dele\v{z} pozitivnih vrednosti tar\v{c}ne spremenljivke v podskupini, \(p_0\) predstavlja dele\v{z} pozitivnih vrednosti tar\v{c}ne spremenljivke v populaciji. \emph{N} je velikost populacije in \emph{n} je velikost podskupine. 
+    
+    \item \textbf{$\chi^2$--test} neodvisnosti:
+\[
+q_{\chi^2} = \sqrt{q_{BT}},
+\]
+    
+    \item \textbf{Ute\v{z}ena relativna kvalifikacijska to\v{c}nost} (WRACC): \v{z}rtvuje splo\v{s}nost v zameno za to\v{c}nost podskupin. 
+\[
+q_{WRACC} = \frac{n}{N} \cdot (p - p_0) ,
+\]
+
+    \item \textbf{Relativni prispevek} (RG):
+\[q_{RG} = \frac{p - p_0}{p_0 \cdot (1 - p_0)} , \] \citep{atzmuellerBook2007}
+    
+    \item \textbf{LIFT}:
+\[q_{LIFT} = \frac{p}{p_0} ,\]
+
+    \item \textbf{Piatetski shapiro} (PS): 
+\[q_{PS} = n \cdot (p - p_0) . \] \citep{atzmueller2009fast}
+
+    PS axiomi kvalitativnih metrik:
+    \begin{enumerate}
+        \item $q(s)=0$ for $p=p_0$,
+        \item $q(s)$ monotoni\v{c}no pove\v{c}anje $p$ ob kontantni vrednosti $n$,
+        \item $q(s)$ monotoni\v{c}no pove\v{c}anje $n$ ko je $p = \frac{c}{n}$, $c$ je kontanta,
+        \item $q(s)$ monotoni\v{c}no pove\v{c}anje $n$ ob kontantni vrednosti $p > p_0$ \citep{atzmuellerBook2007}.
+    \end{enumerate} 
+\end{itemize}

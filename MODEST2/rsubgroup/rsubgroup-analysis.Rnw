@@ -1,0 +1,260 @@
+%povezava s starševskim dokumentom
+<<rsubgoup-model, echo=FALSE, cache=FALSE, eval=TRUE>>=
+#connect with parent file
+knitr::set_parent('../sladkorni-bolniki.Rnw')
+@
+
+<<rezultati, echo=FALSE, error=TRUE, warning=FALSE, eval=TRUE,cache=TRUE>>=
+sb_data <- zdruziBolnikePoLetuRecepta(file_path = file_path)
+sb_data <- lapply(sb_data, odstraniRecepte)
+rezultati <- poLetih(list_data = sb_data)
+rezultati <- sortL(li = rezultati, by = "coverage", decrease = TRUE)
+
+@
+
+\subsection{leto 2011}
+<<a2011, echo=FALSE, error=TRUE, warning=FALSE, eval=TRUE, cache=TRUE, results='asis',fig.cap="Stevilo receptov na posamezno skupino zdravil v letu 2011", fig.height=3.5, fig.pos="!hb">>=
+#konfiguracija podatkov
+#izberi kvalitativne vrednosti
+year_results <- rezultati$`2011`
+columns <- c("subgroup", "size", "da", "coverage", 
+             "ppv", "sensitivity","specificity")
+#spremeni tabelo v latex kodo
+latexTable(df                  = year_results[ ,columns],
+           caption             = "Znacilne skupine v letu 2011",
+           align               = "|l|R|c|c|c|c|c|c|",
+           display             = c("d","s","d","d","f","f","f","f"),
+           hline.after         = c(-1, 0, 1:nrow(year_results)),
+           tabular.environment = "longtable",
+           floating            = FALSE,
+           include.rownames    = TRUE)
+
+year_data <- sb_data$`2011`
+
+z <- apply(X = year_data[ ,3:ncol(year_data)], 2, function(x){
+    sum(x == "DA")
+})
+
+barplot(sort(z, decreasing = TRUE), space = 0.5,las = 2, cex.axis = 0.75, ylab = "Stevilo zdravil", xlab = "ATC 3 koda zdravila", ylim = c(0,600), cex.names = 0.65)
+
+filter <- sb_data$`2011`[which(sb_data$`2011`$C10 == "DA" & sb_data$`2011`$C09 == "DA"), names(sb_data$`2011`)[which(!names(sb_data$`2011`) %in% c("C10", "C09"))]]
+
+year_results <- subgroupDiscovery(data_config = list(data = filter, target = c("A10", "DA")), 
+                                  method      = "sdmap", 
+                                  relfilter   = TRUE, 
+                                  k           = 20, 
+                                  qf          = "wracc", 
+                                  attributes  = names(filter))
+#spremeni tabelo v latex kodo
+latexTable(df                  = sortDF(year_results[ ,columns], by = "coverage", decrease = TRUE),
+           caption             = "Znacilne skupine v letu 2011 - filter C10 in C09",
+           align               = "|l|R|c|c|c|c|c|c|",
+           display             = c("d","s","d","d","f","f","f","f"),
+           hline.after         = c(-1, 0, 1:nrow(year_results)),
+           tabular.environment = "longtable",
+           floating            = FALSE,
+           include.rownames    = TRUE)
+@
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{leto 2012}
+<<a2012, echo=FALSE, error=TRUE, warning=FALSE, eval=TRUE, cache=TRUE, results='asis',fig.cap="Stevilo receptov na posamezno skupino zdravil v letu 2012", fig.height=3.5, fig.pos="!hb">>=
+#konfiguracija podatkov
+#izberi kvalitativne vrednosti
+year_results <- rezultati$`2012`
+columns <- c("subgroup", "size", "da", "coverage", 
+             "ppv", "sensitivity","specificity")
+#spremeni tabelo v latex kodo
+latexTable(df                  = year_results[ ,columns],
+           caption             = "Znacilne skupine v letu 2012",
+           align               = "|l|R|c|c|c|c|c|c|",
+           display             = c("d","s","d","d","f","f","f","f"),
+           hline.after         = c(-1, 0, 1:nrow(year_results)),
+           tabular.environment = "longtable",
+           floating            = FALSE,
+           include.rownames    = TRUE)
+
+year_data <- sb_data$`2012`
+
+z <- apply(X = year_data[ ,3:ncol(year_data)], 2, function(x){
+    sum(x == "DA")
+})
+
+barplot(sort(z, decreasing = TRUE), space = 0.5,las = 2, cex.axis = 0.75, ylab = "Stevilo zdravil", xlab = "ATC 3 koda zdravila", ylim = c(0,600), cex.names = 0.65)
+
+filter <- sb_data$`2012`[which(sb_data$`2012`$C10 == "DA" & sb_data$`2012`$C09 == "DA"), names(sb_data$`2012`)[which(!names(sb_data$`2012`) %in% c("C10", "C09"))]]
+
+year_results <- subgroupDiscovery(data_config = list(data = filter, target = c("A10", "DA")), 
+                                  method      = "sdmap", 
+                                  relfilter   = TRUE, 
+                                  k           = 20, 
+                                  qf          = "wracc", 
+                                  attributes  = names(filter))
+#spremeni tabelo v latex kodo
+latexTable(df                  = sortDF(year_results[ ,columns], by = "coverage", decrease = TRUE),
+           caption             = "Znacilne skupine v letu 2012 - filter C10 in C09",
+           align               = "|l|R|c|c|c|c|c|c|",
+           display             = c("d","s","d","d","f","f","f","f"),
+           hline.after         = c(-1, 0, 1:nrow(year_results)),
+           tabular.environment = "longtable",
+           floating            = FALSE,
+           include.rownames    = TRUE)
+
+@
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{leto 2013}
+\vspace{0.07cm}
+<<a2013, echo=FALSE, error=TRUE, warning=FALSE, eval=TRUE, cache=TRUE, results='asis',fig.cap="Stevilo receptov na posamezno skupino zdravil v letu 2013", fig.height=3.5, fig.pos="!hb">>=
+#konfiguracija podatkov
+#izberi kvalitativne vrednosti
+year_results <- rezultati$`2013`
+columns <- c("subgroup", "size", "da", "coverage", 
+             "ppv", "sensitivity","specificity")
+#spremeni tabelo v latex kodo
+latexTable(df                  = year_results[ ,columns],
+           caption             = "Znacilne skupine v letu 2013",
+           align               = "|l|R|c|c|c|c|c|c|",
+           display             = c("d","s","d","d","f","f","f","f"),
+           hline.after         = c(-1, 0, 1:nrow(year_results)),
+           tabular.environment = "longtable",
+           floating            = FALSE,
+           include.rownames    = TRUE)
+
+year_data <- sb_data$`2013`
+
+z <- apply(X = year_data[ ,3:ncol(year_data)], 2, function(x){
+    sum(x == "DA")
+})
+
+barplot(sort(z, decreasing = TRUE), space = 0.5,las = 2, cex.axis = 0.75, ylab = "Stevilo zdravil", xlab = "ATC 3 koda zdravila", ylim = c(0,600), cex.names = 0.65)
+
+filter <- sb_data$`2013`[which(sb_data$`2013`$C10 == "DA" & sb_data$`2013`$C09 == "DA"), names(sb_data$`2013`)[which(!names(sb_data$`2013`) %in% c("C10", "C09"))]]
+
+year_results <- subgroupDiscovery(data_config = list(data = filter, target = c("A10", "DA")), 
+                                  method      = "sdmap", 
+                                  relfilter   = TRUE, 
+                                  k           = 20, 
+                                  qf          = "wracc", 
+                                  attributes  = names(filter))
+#spremeni tabelo v latex kodo
+latexTable(df                  = sortDF(year_results[ ,columns], by = "coverage", decrease = TRUE),
+           caption             = "Znacilne skupine v letu 2013 - filter C10 in C09",
+           align               = "|l|R|c|c|c|c|c|c|",
+           display             = c("d","s","d","d","f","f","f","f"),
+           hline.after         = c(-1, 0, 1:nrow(year_results)),
+           tabular.environment = "longtable",
+           floating            = FALSE,
+           include.rownames    = TRUE)
+
+@
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{leto 2014}
+\vspace{0.07cm}
+<<a2014, echo=FALSE, error=TRUE, warning=FALSE, eval=TRUE, cache=TRUE, results='asis',fig.cap="Stevilo receptov na posamezno skupino zdravil v letu 2014", fig.height=3.5, fig.pos="!hb">>=
+#konfiguracija podatkov
+#izberi kvalitativne vrednosti
+year_results <- rezultati$`2014`
+columns <- c("subgroup", "size", "da", "coverage", 
+             "ppv", "sensitivity","specificity")
+#spremeni tabelo v latex kodo
+latexTable(df                  = year_results[ ,columns],
+           caption             = "Znacilne skupine v letu 2014",
+           align               = "|l|R|c|c|c|c|c|c|",
+           display             = c("d","s","d","d","f","f","f","f"),
+           hline.after         = c(-1, 0, 1:nrow(year_results)),
+           tabular.environment = "longtable",
+           floating            = FALSE,
+           include.rownames    = TRUE)
+
+year_data <- sb_data$`2014`
+
+z <- apply(X = year_data[ ,3:ncol(year_data)], 2, function(x){
+    sum(x == "DA")
+})
+
+barplot(sort(z, decreasing = TRUE), space = 0.5,las = 2, cex.axis = 0.75, ylab = "Stevilo zdravil", xlab = "ATC 3 koda zdravila", ylim = c(0,600), cex.names = 0.65)
+
+filter <- sb_data$`2014`[which(sb_data$`2014`$C10 == "DA" & sb_data$`2014`$C09 == "DA"), names(sb_data$`2014`)[which(!names(sb_data$`2014`) %in% c("C10", "C09"))]]
+
+year_results <- subgroupDiscovery(data_config = list(data = filter, target = c("A10", "DA")), 
+                                  method      = "sdmap", 
+                                  relfilter   = TRUE, 
+                                  k           = 20, 
+                                  qf          = "wracc", 
+                                  attributes  = names(filter))
+#spremeni tabelo v latex kodo
+latexTable(df                  = sortDF(year_results[ ,columns], by = "coverage", decrease = TRUE),
+           caption             = "Znacilne skupine v letu 2014 - filter C10 in C09",
+           align               = "|l|R|c|c|c|c|c|c|",
+           display             = c("d","s","d","d","f","f","f","f"),
+           hline.after         = c(-1, 0, 1:nrow(year_results)),
+           tabular.environment = "longtable",
+           floating            = FALSE,
+           include.rownames    = TRUE)
+
+@
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{leto 2015}
+<<a2015, echo=FALSE, error=TRUE, warning=FALSE, eval=TRUE, cache=TRUE, results='asis',fig.cap="Stevilo receptov na posamezno skupino zdravil v letu 2015", fig.height=3.5, fig.pos="!hb">>=
+#konfiguracija podatkov
+#izberi kvalitativne vrednosti
+year_results <- rezultati$`2015`
+columns <- c("subgroup", "size", "da", "coverage", 
+             "ppv", "sensitivity","specificity")
+#spremeni tabelo v latex kodo
+latexTable(df                  = year_results[ ,columns],
+           caption             = "Znacilne skupine v letu 2015",
+           align               = "|l|R|c|c|c|c|c|c|",
+           display             = c("d","s","d","d","f","f","f","f"),
+           hline.after         = c(-1, 0, 1:nrow(year_results)),
+           tabular.environment = "longtable",
+           floating            = FALSE,
+           include.rownames    = TRUE)
+
+year_data <- sb_data$`2015`
+
+z <- apply(X = year_data[,3:ncol(year_data)], 2, function(x){
+    sum(x == "DA")
+})
+
+barplot(sort(z, decreasing = TRUE), space = 0.5,las = 2, cex.axis = 0.75, ylab = "Stevilo zdravil", xlab = "ATC 3 koda zdravila", ylim = c(0,600), cex.names = 0.65)
+
+filter <- sb_data$`2015`[which(sb_data$`2015`$C10 == "DA" & sb_data$`2015`$C09 == "DA"), names(sb_data$`2015`)[which(!names(sb_data$`2015`) %in% c("C10", "C09"))]]
+
+year_results <- subgroupDiscovery(data_config = list(data = filter, target = c("A10", "DA")), 
+                                  method      = "sdmap", 
+                                  relfilter   = TRUE, 
+                                  k           = 20, 
+                                  qf          = "wracc", 
+                                  attributes  = names(filter))
+#spremeni tabelo v latex kodo
+latexTable(df                  = sortDF(year_results[ ,columns], by = "coverage", decrease = TRUE),
+           caption             = "Znacilne skupine v letu 2015 - filter C10 in C09",
+           align               = "|l|R|c|c|c|c|c|c|",
+           display             = c("d","s","d","d","f","f","f","f"),
+           hline.after         = c(-1, 0, 1:nrow(year_results)),
+           tabular.environment = "longtable",
+           floating            = FALSE,
+           include.rownames    = TRUE)
+
+@

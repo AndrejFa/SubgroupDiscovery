@@ -1,0 +1,10 @@
+VREfm                   Vancomycin resistant Enteroccocus faecium
+                        (VREfm) database
+cat_culture_time        Categorical culture gain time
+cat_icu_days            Categorical days from intesive care unit (ICU)
+categorical_age         Categorical age
+hello                   Hello, World!
+join_dept               Joined culture department
+preprocess_data         Preprocess database
+replace_spaces          Replace spaces
+year_month              Date in year-month format

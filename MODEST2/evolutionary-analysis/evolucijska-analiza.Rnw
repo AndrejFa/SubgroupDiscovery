@@ -1,0 +1,46 @@
+%povezava s starševskim dokumentom
+<<evolution-model, echo=FALSE, cache=FALSE, eval=TRUE>>=
+#connect with parent file
+knitr::set_parent('../sladkorni-bolniki.Rnw')
+@
+
+<<evolution, echo=FALSE, error=TRUE, warning=FALSE, eval=TRUE, cache=TRUE, results='hide'>>=
+#konfiguracija podatkov
+config <- list(data     = sb_data, 
+               relation = "ZdraviloDiabetes")
+#analiza
+ruleSet <- subgroupDiscovery(data_config    = config,
+                             method         = "mesdif",
+                             seed           = 323232,
+                             nEval          = 10000,
+                             eliteLength    = 20,
+                             Obj1           = "UNUS",
+                             Obj2           = "CCNF",
+                             Obj3           = "SIGN",
+                             targetVariable = "A10",
+                             targetClass    = "DA")
+
+#razvrsti
+#ruleSet <- sortDF(ruleSet, "TPr")
+@
+
+<<tabela, echo=FALSE, error=TRUE, warning=FALSE, eval=TRUE, cache=TRUE, results='asis', fig.cap="Razmerje TPr/FPr z metodo MESDIF">>=
+#izberi stolpce
+columns <- c("subgroup", "size", "da",
+             "Coverage", "Confidence", "TPr", "FPr")
+#formatiraj stolpce
+col_format <- c("d","s","d","d","f","f","f", "f")
+#pripravi latex tabelo
+latexTable(df                  = ruleSet[ ,columns],
+           label               = "analiza-2",
+           caption             = "Podskupine, metoda: MESDIF",
+           align               = "|l|R|c|c|c|c|c|c|",
+           display             = col_format,
+           hline.after         = c(-1, 0, 1:nrow(ruleSet)),
+           tabular.environment = "longtable",
+           floating            = FALSE,
+           include.rownames    = TRUE)
+
+plotSubgroups(ruleTable = ruleSet, tpr = "TPr", "FPr")
+
+@
